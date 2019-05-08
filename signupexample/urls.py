@@ -26,6 +26,7 @@ urlpatterns = [
     #path(r'^', include(router.urls))
     #path(r'contact/', views.ContactView.as_view(), name='contact'),
     path('contacts/', views.ContactList.as_view()),
+    #path('contacts/', signup),
 
 ]
 #urlpatterns += router.urls
