@@ -8,4 +8,4 @@ class Signup(models.Model):
     email = models.EmailField()
     description = models.CharField(max_length= 255)
 
-admin.register(Signup)
+admin.site.register(Signup)
