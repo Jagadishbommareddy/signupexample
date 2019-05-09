@@ -18,15 +18,21 @@ from django.urls import path,include
 from signup.views import *
 from rest_framework import routers
 from signup import views
-#router = routers.SimpleRouter()
-#router.register(r'signup',SingupViewSet)
+from rest_framework_swagger.views import get_swagger_view
+from rest_framework.documentation import include_docs_urls
+
+schema_view = get_swagger_view(title='Polls API')
+# router = routers.SimpleRouter()
+# router.register(r'signup',SingupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path(r'^', include(router.urls))
+    #path(r'^', include(router.urls)),
     #path(r'contact/', views.ContactView.as_view(), name='contact'),
     path('contacts/', views.ContactList.as_view()),
-    #path('contacts/', signup),
+    #path('contacts/', signup),,
+    path(r'swagger-docs/', schema_view),
+    path(r'docs/', include_docs_urls(title='My API title'))
 
 ]
 #urlpatterns += router.urls

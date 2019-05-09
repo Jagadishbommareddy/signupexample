@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 # class SingupViewSet(viewsets.ModelViewSet):
 #     queryset = Signup.objects.all()
-#     serializer_class = SingupSerializer
+#     serializer_class = SignupSerializer
 
 
 class ContactList(APIView):
@@ -32,6 +32,22 @@ class ContactList(APIView):
         #sig.save()
         return JsonResponse({"response":"user_detail", "status": "success"})
 
+    def put (self,request):
+        data = json.loads(request.body.decode('utf-8'))
+        sig = Signup.objects.get(pk =data['id'])
+        usr = sig.user
+        print (usr)
+        usr.first_name = data['first_name']
+        usr.save()
+        sig.email = data['email']
+        sig.save()
+
+        return JsonResponse({"response": "update", "status": "success"})
+    def delete(self,request):
+        data = json.loads(request.body.decode('utf-8'))
+        sig = Signup.objects.get(pk=data['id'])
+        sig.delete()
+        return JsonResponse({"response": "delete", "status": "success"})
 # parser_classes = (JSONParser)
 # @csrf_exempt
 # def signup( request):
